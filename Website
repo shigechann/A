@@ -1,0 +1,172 @@
+ueda-catholic-church/
+│
+├── index.html
+├── about.html
+├── schedule.html
+├── events.html
+├── gallery.html
+├── contact.html
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   ├── main.js
+│   ├── lang-en.js
+│   ├── lang-ja.js
+│   ├── lang-pt.js
+│   └── lang-es.js
+│
+├── images/
+│   └── (gallery placeholders)
+│
+└── assets/
+    └── logo.png
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ueda Catholic Church</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">UEDA</div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="about.html" data-i18n="nav.about">About</a></li>
+        <li><a href="schedule.html" data-i18n="nav.schedule">Mass</a></li>
+        <li><a href="events.html" data-i18n="nav.events">Events</a></li>
+        <li><a href="gallery.html" data-i18n="nav.gallery">Gallery</a></li>
+        <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+      <select id="language-selector">
+        <option value="en">EN</option>
+        <option value="ja">日本語</option>
+        <option value="pt">PT</option>
+        <option value="es">ES</option>
+      </select>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 data-i18n="hero.title">Welcome to Ueda Catholic Church</h1>
+      <p data-i18n="hero.subtitle">A modern church rooted in ancient faith</p>
+    </section>
+
+    <section class="mission">
+      <h2 data-i18n="mission.title">Our Mission</h2>
+      <p data-i18n="mission.body">
+        To serve the community with love, faith, and the sacraments.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Ueda Catholic Church</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: goldenrod;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+}
+
+select {
+  margin-left: 20px;
+}
+
+.hero {
+  background: url('../images/hero-placeholder.jpg') no-repeat center center/cover;
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #333;
+}
+
+.mission {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  background-color: #eee;
+}
+let translations = {};
+
+const loadLanguage = async (lang) => {
+  const res = await fetch(`js/lang-${lang}.js`);
+  const data = await res.text();
+  eval(data); // loads to `translations`
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[key]) el.innerText = translations[key];
+  });
+};
+
+document.getElementById('language-selector').addEventListener('change', (e) => {
+  loadLanguage(e.target.value);
+});
+
+// Default language
+loadLanguage('en');
+translations = {
+  "nav.home": "Home",
+  "nav.about": "About Us",
+  "nav.schedule": "Mass Schedule",
+  "nav.events": "Events",
+  "nav.gallery": "Gallery",
+  "nav.contact": "Contact",
+  "hero.title": "Welcome to Ueda Catholic Church",
+  "hero.subtitle": "A modern church rooted in ancient faith",
+  "mission.title": "Our Mission",
+  "mission.body": "To serve the community with love, faith, and the sacraments."
+};
+translations = {
+  "nav.home": "ホーム",
+  "nav.about": "教会について",
+  "nav.schedule": "ミサ時間",
+  "nav.events": "イベント",
+  "nav.gallery": "ギャラリー",
+  "nav.contact": "お問い合わせ",
+  "hero.title": "上田カトリック教会へようこそ",
+  "hero.subtitle": "古い信仰に根ざした現代的な教会",
+  "mission.title": "私たちの使命",
+  "mission.body": "愛と信仰と秘跡で地域社会に仕えること。"
+};
