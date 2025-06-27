@@ -1,0 +1,24 @@
+ueda-catholic-church/
+│
+├── index.html
+├── about.html
+├── schedule.html
+├── events.html
+├── gallery.html
+├── contact.html
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   ├── main.js
+│   ├── lang-en.js
+│   ├── lang-ja.js
+│   ├── lang-pt.js
+│   └── lang-es.js
+│
+├── images/
+│   └── (gallery placeholders)
+│
+└── assets/
+    └── logo.png
